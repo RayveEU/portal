@@ -202,18 +202,6 @@ func (s *Session) Transfer(srv *server.Server) (err error) {
 		s.serverMu.Lock()
 		s.tempServerConn = conn
 		s.serverMu.Unlock()
-		
-		chunkX := int32(pos.X()) >> 4
-		chunkZ := int32(pos.Z()) >> 4
-		for x := int32(-1); x <= 1; x++ {
-			for z := int32(-1); z <= 1; z++ {
-				_ = s.conn.WritePacket(&packet.LevelChunk{
-					Position:      protocol.ChunkPos{chunkX + x, chunkZ + z},
-					SubChunkCount: 1,
-					RawPayload:    emptyChunk(proxyDimension),
-				})
-			}
-		}
 
 		s.serverMu.Lock()
 		s.server.DecrementPlayerCount()
