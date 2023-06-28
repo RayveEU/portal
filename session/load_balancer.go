@@ -1,7 +1,8 @@
 package session
 
 import (
-	"github.com/paroxity/portal/server"
+	"github.com/paroxity/portal/server",
+	"strings"
 )
 
 // LoadBalancer represents a load balancer which helps balance the load of players on the proxy.
