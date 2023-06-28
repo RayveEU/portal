@@ -24,7 +24,7 @@ func NewSplitLoadBalancer(registry *server.Registry) *SplitLoadBalancer {
 // FindServer ...
 func (b *SplitLoadBalancer) FindServer(*Session) (srv *server.Server) {
 	for _, s := range b.registry.Servers() {
-		if srv == nil || srv.PlayerCount() > s.PlayerCount() {
+		if strings.HasPrefix(s.Name(), "Lobby-") && (srv == nil || srv.PlayerCount() > s.PlayerCount()) {
 			srv = s
 		}
 	}
