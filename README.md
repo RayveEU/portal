@@ -1,9 +1,9 @@
 ![Banner](https://raw.githubusercontent.com/Paroxity/portal/master/banner.png)
+A lightweight transfer proxy written in Go for Minecraft: Bedrock Edition.
+
 # THIS IS A FORK
 Use it at your own risk!
 Please don´t annoy the orginial authors of portal with issues occuring on this fork
-
-A lightweight transfer proxy written in Go for Minecraft: Bedrock Edition.
 
 # Installation
 
