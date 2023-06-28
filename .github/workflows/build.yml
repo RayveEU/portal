@@ -1,4 +1,6 @@
 name: Build Portal
+permissions:
+  contents: write
 on:
   release:
     types:
