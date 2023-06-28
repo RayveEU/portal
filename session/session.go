@@ -202,18 +202,7 @@ func (s *Session) Transfer(srv *server.Server) (err error) {
 		s.serverMu.Lock()
 		s.tempServerConn = conn
 		s.serverMu.Unlock()
-
-		var proxyDimension int32
-		for _, dimension := range []int32{packet.DimensionOverworld, packet.DimensionNether, packet.DimensionEnd} {
-			if dimension != s.serverConn.GameData().Dimension && dimension != conn.GameData().Dimension {
-				proxyDimension = dimension
-				break
-			}
-		}
-
-		pos := s.conn.GameData().PlayerPosition
-		s.changeDimension(proxyDimension, pos)
-
+		
 		chunkX := int32(pos.X()) >> 4
 		chunkZ := int32(pos.Z()) >> 4
 		for x := int32(-1); x <= 1; x++ {
