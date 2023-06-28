@@ -1,7 +1,7 @@
 package session
 
 import (
-	"github.com/paroxity/portal/server",
+	"github.com/paroxity/portal/server"
 	"strings"
 )
 
