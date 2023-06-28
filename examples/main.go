@@ -53,7 +53,7 @@ func main() {
 
 		Address: conf.Network.Address,
 		ListenConfig: minecraft.ListenConfig{
-			StatusProvider: portal.NewMOTDStatusProvider("Portal"),
+			StatusProvider: portal.NewMOTDStatusProvider("§l§fRayveEU"),
 
 			ResourcePacks:        resourcePacks,
 			TexturePacksRequired: conf.ResourcePacks.Required,
