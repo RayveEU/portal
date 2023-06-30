@@ -203,8 +203,16 @@ func (s *Session) Transfer(srv *server.Server) (err error) {
 		s.tempServerConn = conn
 		s.serverMu.Unlock()
 
+		var proxyDimension int32
+		for _, dimension := range []int32{packet.DimensionOverworld, packet.DimensionNether, packet.DimensionEnd} {
+			if dimension != s.serverConn.GameData().Dimension && dimension != conn.GameData().Dimension {
+				proxyDimension = dimension
+				break
+			}
+		}
+
 		pos := s.conn.GameData().PlayerPosition
-		s.changeDimension(packet.DimensionNether, pos)
+		s.changeDimension(proxyDimension, pos)
 
 		chunkX := int32(pos.X()) >> 4
 		chunkZ := int32(pos.Z()) >> 4
@@ -213,7 +221,7 @@ func (s *Session) Transfer(srv *server.Server) (err error) {
 				_ = s.conn.WritePacket(&packet.LevelChunk{
 					Position:      protocol.ChunkPos{chunkX + x, chunkZ + z},
 					SubChunkCount: 1,
-					RawPayload:    emptyChunk(packet.DimensionNether),
+					RawPayload:    emptyChunk(proxyDimension),
 				})
 			}
 		}
