@@ -8,7 +8,6 @@ import (
 	"github.com/sandertv/gophertunnel/minecraft/protocol/packet"
 	"github.com/sirupsen/logrus"
 	"sync"
-	"time"
 )
 
 // handlePackets handles the packets sent between the client and the server. Processes such as runtime
@@ -62,13 +61,6 @@ func handlePackets(s *Session) {
 						_ = s.conn.WritePacket(&packet.SetDifficulty{Difficulty: uint32(gameData.Difficulty)})
 						_ = s.conn.WritePacket(&packet.GameRulesChanged{GameRules: gameData.GameRules})
 						_ = s.conn.WritePacket(&packet.SetPlayerGameType{GameType: gameData.PlayerGameMode})
-
-						timer := time.NewTimer(2 * time.Second)
-						defer timer.Stop()
-						go func() {
-							<-timer.C
-							_ = s.conn.WritePacket(&packet.PlayStatus{Status: packet.PlayStatusPlayerSpawn})
-						}()
 
 						w.Wait()
 
