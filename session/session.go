@@ -118,7 +118,7 @@ func (s *Session) dial(srv *server.Server) (*minecraft.Conn, error) {
 // login performs the initial login sequence for the session.
 func (s *Session) login() (err error) {
 	var g sync.WaitGroup
-	g.Add(2)
+	g.Add(5)
 	go func() {
 		err = s.conn.StartGameTimeout(s.serverConn.GameData(), time.Minute)
 		g.Done()
